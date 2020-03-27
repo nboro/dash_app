@@ -5,6 +5,7 @@ from dash.dependencies import Input, Output
 import plotly.graph_objs as go
 import pandas as pd
 from view import layout
+import flask
 
 cars = pd.read_csv('cars_processed.csv')
 cars_years = pd.read_csv('years_manufacturers.csv')
@@ -12,12 +13,14 @@ cars_years = pd.read_csv('years_manufacturers.csv')
 #replace with bootstrap
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
+server = flask.Flask(__name__)
 app = dash.Dash(
     __name__,meta_tags=[{'name': 'viewport', 'content': 'width=device-width',
     'title':'Nemania Borovits | HW3 Data Visualization | MPG Dataset',
     'keywords':'Nemania Borovits, python dash, data visualization',
     'description':'Nemania Borovits made this simple python dash app as part of hw3 for data visualization course'}],
-    external_stylesheets=external_stylesheets
+    external_stylesheets=external_stylesheets,
+    server = server
 )
 # app.css.append_css({'external_url': 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'})
 app.title = 'Nemania Borovits | HW3 Data Visualization | MPG Dataset'
@@ -113,7 +116,7 @@ def display_hover_data(hoverData):
                 'size': 15,
                 'line': {'width': 0.5, 'color': 'white'}
             },
-            name='To mouni tis mana sou',
+            # name='To mouni tis mana sou',
         ))
 
     return {
@@ -131,4 +134,4 @@ def display_hover_data(hoverData):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=False, port=80)
