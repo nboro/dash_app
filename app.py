@@ -19,11 +19,10 @@ app = dash.Dash(
     'description':'Nemania Borovits made this simple python dash app as part of hw3 for data visualization course'}],
     external_stylesheets=external_stylesheets
 )
+server = app.server
 # app.css.append_css({'external_url': 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'})
 app.title = 'Nemania Borovits | HW3 Data Visualization | MPG Dataset'
 app.layout = layout
-
-server = app.server
 
 #first visualizations callbacks
 @app.callback(
