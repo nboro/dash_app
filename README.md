@@ -1,2 +1,3 @@
-# A simple dash app containing 2 interactive visualizations
-This is a plotly dash app i made as assignment for the course Data Visualization
+# Dash app
+This is a plotly dash app I made as an assignment for the course Data Visualization.
+The app contains 2 interactive visualizations.
