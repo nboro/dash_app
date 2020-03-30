@@ -86,7 +86,7 @@ def update_figure2(selected_year):
         'data': traces,
         'layout': dict(
             xaxis={'type': 'Linear', 'title': 'Manufacturers'},
-            yaxis={'title': 'Mean MPG', 'range': [5, 45]},
+            yaxis={'title': 'Average MPG', 'range': [5, 45]},
             margin={'l': 60, 'b': 80, 't': 10, 'r': 10},
             legend={'x': 1, 'y': 1},
             hovermode = 'closest',
@@ -115,15 +115,14 @@ def display_hover_data(clickData):
                 'size': 15,
                 'line': {'width': 0.5, 'color': 'white'}
             },
-            # name='To mouni tis mana sou',
         ))
-        kati = 'The average MPG for every year for manufacturer: '+'<b><i>{}</i></b>'.format(target)
+        title = 'The average MPG for every year for manufacturer: '+'<b><i>{}</i></b>'.format(target)
 
     return {
         'data': traces23,
         'layout': dict(
             xaxis={'type': 'Linear', 'title': 'Years'},
-            yaxis={'title': 'Mean MPG Manufacturer', 'range': [5, 45]},
+            yaxis={'title': 'Average MPG Manufacturer', 'range': [5, 45]},
             margin={'l': 60, 'b': 80, 't': 10, 'r': 10},
             legend={'x': 0, 'y': 1},
             clickmode = 'event+select',
@@ -131,11 +130,11 @@ def display_hover_data(clickData):
             annotations = [{'x': 0.1, 'y': 0.98, 'xanchor': 'left', 'yanchor': 'bottom',
                 'xref': 'paper', 'yref': 'paper', 'showarrow': False,
                 'align': 'left', 'bgcolor': 'rgba(255, 255, 255, 0.5)',
-                'text':kati}]
+                'text':title}]
         )
     }
 #second visualizations callbacks end
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=80)
+    app.run_server(debug=False, port=80)
