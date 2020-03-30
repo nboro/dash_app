@@ -94,13 +94,14 @@ def update_figure2(selected_year):
         )
     }
 
+
 #click/hover
 @app.callback(
     Output('hover-data', 'figure'),
-    [Input('graph-with-slider2', 'hoverData')])
-def display_hover_data(hoverData):
-    if hoverData:
-        cc = hoverData['points'][0]
+    [Input('graph-with-slider2', 'clickData')])
+def display_hover_data(clickData):
+    if clickData:
+        cc = clickData['points'][0]
         target = cc['x']
         filtered_cars_year = cars_years[cars_years['manufacturer'] == target]
         traces23 = []
@@ -116,6 +117,7 @@ def display_hover_data(hoverData):
             },
             # name='To mouni tis mana sou',
         ))
+        kati = 'The average MPG for every year for manufacturer: '+'<b><i>{}</i></b>'.format(target)
 
     return {
         'data': traces23,
@@ -126,10 +128,14 @@ def display_hover_data(hoverData):
             legend={'x': 0, 'y': 1},
             clickmode = 'event+select',
             transition = {'duration': 500},
+            annotations = [{'x': 0.1, 'y': 0.98, 'xanchor': 'left', 'yanchor': 'bottom',
+                'xref': 'paper', 'yref': 'paper', 'showarrow': False,
+                'align': 'left', 'bgcolor': 'rgba(255, 255, 255, 0.5)',
+                'text':kati}]
         )
     }
 #second visualizations callbacks end
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False, port=80)
+    app.run_server(debug=True, port=80)
