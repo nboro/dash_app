@@ -33,14 +33,16 @@ layout = html.Div(children=[
 
     #first visualization
     html.Div(children=[
-            html.H4(children='MPG and vehicle weight filtered by year and country')        
-        ],style = {'text-align':'center','text-decoration':'underline'}),
+            html.H4(children='Visualization 1',style = {'text-align':'center','text-decoration':'underline'}),
+            html.P(children = 'a) MPG and vehicle weight filtered by year and country',style = {'text-align':'center'}),
+            html.P(children = 'b) Acceleration per vehicle model',style = {'text-align':'center'}),        
+        ],style = {'text-align':'center'}),
 
     html.Div(children=[
 
         html.Div(children=[
             dcc.Graph(id='graph-with-slider')
-        ],style={'width':'1080px'}),        
+        ],style={'width':'45%'}),        
         
         html.Div(children=[
             dcc.Slider(
@@ -55,7 +57,10 @@ layout = html.Div(children=[
         ]),
 
         html.Div(children=[
-            html.P(children='Car model year',style={'width':'75%','margin-left':'5px','text-align':'center'})])
+            html.P(children='Car model year',style={'width':'75%','margin-left':'5px','text-align':'center'})]),
+
+        html.Div(children=[
+                dcc.Graph(id='graph-with-selection')],style={'width':'45%'}),       
 
         ],style = {'display':'flex','align-items':'center','justify-content':'center'}),
 
@@ -68,11 +73,10 @@ layout = html.Div(children=[
         #second visualization 
 
         html.Div(children=[
-            html.H4(children='Mean MPG per year and per manufacturer')        
-        ]
-        ,style = {
-            'text-align':'center',
-            'text-decoration':'underline'}),
+            html.H4(children='Visualization 2',style = {'text-align':'center','text-decoration':'underline'}),
+            html.P(children = 'a) Average MPG per mannufacturer and year',style = {'text-align':'center'}),
+            html.P(children = 'b) Average MPG for manunacturer for all years',style = {'text-align':'center'}),        
+        ],style = {'text-align':'center'}),
 
         html.Div(children=[
 

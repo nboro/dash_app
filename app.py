@@ -36,7 +36,8 @@ def update_figure(selected_year):
         traces.append(dict(
             x=df_by_country['weight'],
             y=df_by_country['mpg'],
-            text=df_by_country['manufacturer']+ ' '+ df_by_country['model'],
+            text=df_by_country['car name'],
+            # customdata = df_by_country['year'],
             mode='markers',
             opacity=0.7,
             marker={
@@ -58,6 +59,51 @@ def update_figure(selected_year):
             transition = {'duration': 500},
         )
     }
+
+
+@app.callback(
+    Output('graph-with-selection', 'figure'),
+    [Input('graph-with-slider', 'selectedData'),
+    Input('year-slider', 'value')])
+def update_selection_figure(selectedData,selected_year):
+    
+    selection_traces = []
+    point_list = selectedData['points']
+    for point in point_list:
+
+        filt_df = cars[(cars['car name'] == point['text']) & (cars['model year'] == selected_year) 
+        & (cars['weight'] == point['x']) & (cars['mpg'] == point['y'])]
+        acc = str(filt_df.iloc[0]['acceleration'])
+        selection_traces.append(dict(
+            x=filt_df['car name'],
+            y=filt_df['acceleration'],
+            text='The acceleration for '+ filt_df['car name']+ ' is ' + acc,
+            type='bar',
+            opacity=0.7,
+            width = 0.2,
+            # marker={
+            #     'size': 5,
+            #     'line': {'width': 0.5, 'color': 'white'}
+            # },
+            name= filt_df.iloc[0]['car name'],
+        ))
+
+    return {
+        'data': selection_traces,
+        'layout': dict(
+            title = 'Acceleration for the selected cars',
+            xaxis={'type': 'Linear', 'title': 'Car Name','rotate':'90'},
+            yaxis={'title': 'Acceleration', 'range': [5, 30]},
+            margin={'l': 60, 'b': 100, 't': 50, 'r': 10},
+            legend={'x': 1, 'y': 1},
+            hovermode='closest',
+            transition = {'duration': 500},
+            barmode='group',
+            bargap=0.15, # gap between bars of adjacent location coordinates.
+            bargroupgap=0.1 # gap between bars of the same location coordinate.
+        )
+    }
+
 #first visualizations callbacks end
 
 #second visualizations callbacks
